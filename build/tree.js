@@ -90,7 +90,7 @@ var Tree = React.createClass({displayName: "Tree",
 					
 						childrenNodes.map(function(node, i){
 							return (
-								React.createElement(Tree, {node: Immutable.Map(node), 
+								React.createElement(Tree, {node:  Immutable.Map(node), 
 									checked: this.childrenCheck, 
 									addNode: this.props.addNode, 
 									deleteNode: this.props.deleteNode, 
