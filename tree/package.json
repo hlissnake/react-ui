@@ -1,0 +1,21 @@
+{
+  "name": "react-app",
+  "version": "1.0.0",
+  "dependencies": {
+    "immutable": "*",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.0",
+    "redux": "^3.3.1"
+  },
+  "devDependencies": {
+    "babel-preset-react": "^6.5.0",
+    "babel-register": "^6.5.2",
+    "gulp": "3.x.x",
+    "gulp-code": "*",
+    "gulp-react": "*",
+    "gulp-uglify": "*",
+    "gulp-webpack": "*",
+    "vinyl-named": "*",
+    "webpack": "*"
+  }
+}
