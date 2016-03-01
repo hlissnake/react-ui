@@ -15,10 +15,10 @@ function onError(err){
 
 gulp.task('js', function () {
   return gulp.src('src/**/*.js')
-    // .pipe(babel({
-    //   presets: ['es2015', 'react']
-    // }))
-    .pipe(react())      // complie React JSX template
+    .pipe(babel({
+      presets: ['react', 'es2015']
+    }))
+    // .pipe(react())      // complie React JSX template
     .on('error', onError)
     .pipe(gulp.dest('build/'));
 });

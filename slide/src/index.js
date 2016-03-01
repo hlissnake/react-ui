@@ -1,6 +1,8 @@
 'use strict';
 
-var App = require('../appView');
+var React = require('react');
+var ReactDOM = require('react-dom');
+var App = require('./ui/appView');
 var Page = require('./page/page');
 var IO = require('./page/io');
 
@@ -51,7 +53,7 @@ IO({
 
 		// React.addons.Perf.start();
 
-		React.render(
+		ReactDOM.render(
 
 			<App offset={ document.body.getBoundingClientRect().height }>
 				<Page enterGame={enterGame}

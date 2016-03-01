@@ -68,9 +68,9 @@ var App = React.createClass({
 TreeStore.subscribe(render);
 
 // Mocking for API request
-setTimeout(function(){
-	TreeStore.dispatch(TreeAction.load(TreeData))
-}, 200)
+TreeData.load(function(data){
+	TreeStore.dispatch(TreeAction.load(data))
+});
 
 function render(){
 	ReactDOM.render(

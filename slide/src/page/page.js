@@ -1,6 +1,7 @@
 'use strict';
 
-var SlideView = require('../../slideView');
+var React = require('react');
+var SlideView = require('../ui/slideView');
 var Car = require('./car');
 
 var Can_Start_States_MAP = {

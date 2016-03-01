@@ -75,4 +75,10 @@ var TreeData = [
 	}
 ]
 
-module.exports = TreeData;
+module.exports = {
+	load : function(callback){
+		setTimeout(function(){
+			callback(TreeData);
+		}, 200)
+	}
+};

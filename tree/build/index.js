@@ -10,71 +10,68 @@ var TreeData = require('./data');
 
 var TreeStore = Redux.createStore(TreeReducer);
 
-var App = React.createClass({displayName: "App",
+var App = React.createClass({
+	displayName: 'App',
 
-	getInitialState : function(){
+
+	getInitialState: function () {
 		return {
-			nodes : []
-		}
+			nodes: []
+		};
 	},
 
-	filterKeyword : function(e){
+	filterKeyword: function (e) {
 		TreeStore.dispatch(TreeAction.search(e.target.value));
 	},
 
-	componentDidMount : function(){
+	componentDidMount: function () {
 		// TreeStore.subscribe(me._onChange);
 	},
 
-	componentWillUnmount : function(){
+	componentWillUnmount: function () {
 		// TreeStore.unsubscribe(this._onChange);
 	},
 
-	render : function(){
-		return (
-			React.createElement("div", null, 
-				React.createElement("div", {className: "tree-search"}, 
-					React.createElement("input", {type: "text", placeholder: "keyword", className: "tree-keyword-search", onChange: this.filterKeyword}), 
-					React.createElement("span", {className: "tree-search-mark"})
-				), 
-			
-				this.props.nodes.map(function(node, i){
-					return (
-						React.createElement(Tree, {node: Immutable.Map(node), key: node.id, 
-							addNode: this._addNode, 
-							deleteNode: this._deleteNode})
-					)
-				}.bind(this))
-			
-			)
-		)
+	render: function () {
+		return React.createElement(
+			'div',
+			null,
+			React.createElement(
+				'div',
+				{ className: 'tree-search' },
+				React.createElement('input', { type: 'text', placeholder: 'keyword', className: 'tree-keyword-search', onChange: this.filterKeyword }),
+				React.createElement('span', { className: 'tree-search-mark' })
+			),
+			this.props.nodes.map(function (node, i) {
+				return React.createElement(Tree, { node: Immutable.Map(node), key: node.id,
+					addNode: this._addNode,
+					deleteNode: this._deleteNode });
+			}.bind(this))
+		);
 	},
 
-	_onChange : function(){
+	_onChange: function () {
 		this.setState({
-			nodes : TreeStore.getState()
-		})
+			nodes: TreeStore.getState()
+		});
 	},
 
-	_addNode : function(content, id){
+	_addNode: function (content, id) {
 		TreeStore.dispatch(TreeAction.create(content, id));
 	},
 
-	_deleteNode : function(id){
-		TreeStore.dispatch(TreeAction.delete(id))
+	_deleteNode: function (id) {
+		TreeStore.dispatch(TreeAction.delete(id));
 	}
 });
 
 TreeStore.subscribe(render);
 
 // Mocking for API request
-setTimeout(function(){
-	TreeStore.dispatch(TreeAction.load(TreeData))
-}, 200)
+TreeData.load(function (data) {
+	TreeStore.dispatch(TreeAction.load(data));
+});
 
-function render(){
-	ReactDOM.render(
-		React.createElement(App, {nodes: TreeStore.getState()}),
-		document.getElementById('tree')
-	);
+function render() {
+	ReactDOM.render(React.createElement(App, { nodes: TreeStore.getState() }), document.getElementById('tree'));
 }

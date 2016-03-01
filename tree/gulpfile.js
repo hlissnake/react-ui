@@ -3,7 +3,7 @@ var gulp = require('gulp');
 var webpack = require('gulp-webpack');
 var uglify = require('gulp-uglify');
 var react = require('gulp-react');
-// var babel = require('gulp-babel');
+var babel = require('gulp-babel');
 var exec = require('child_process').exec;
 
 var pkg = require('./package.json');
@@ -15,10 +15,10 @@ function onError(err){
 
 gulp.task('js', function () {
   return gulp.src('src/**/*.js')
-    // .pipe(babel({
-    //   presets: ['es2015', 'react']
-    // }))
-    .pipe(react())      // complie React JSX template
+    .pipe(babel({
+      presets: ['react', 'es2015']
+    }))
+    // .pipe(react())      // complie React JSX template
     .on('error', onError)
     .pipe(gulp.dest('build/'));
 });

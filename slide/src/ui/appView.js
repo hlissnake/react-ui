@@ -1,6 +1,7 @@
 'use strict';
 
-React.initializeTouchEvents(true);
+var React = require('react');
+var ReactDOM = require('react-dom');
 
 var iOS = window.navigator.userAgent.indexOf('iPhone') >= 0;
 
@@ -39,7 +40,7 @@ var AppView = React.createClass({
 	 * @return {[type]} [description]
 	 */
 	componentDidMount : function(){
-	    this.domStyle = React.findDOMNode(this).style;
+	    this.domStyle = ReactDOM.findDOMNode(this).style;
 		this.domStyle.transform = this._getPosition();
 	},
 
@@ -54,7 +55,7 @@ var AppView = React.createClass({
 
 	_bindTransitionEnd : function(callback){
 		var isTransitionEnd = false,
-			dom = React.findDOMNode(this);
+			dom = ReactDOM.findDOMNode(this);
 
 		function transitionEndCallback() {
 			callback();
@@ -190,7 +191,7 @@ var AppView = React.createClass({
 					WebkitTransform: transform
 				 }} >
 
-	        	<div class="app-view-content">
+	        	<div className="app-view-content">
 					{this.props.children}
 				</div>
 
@@ -216,7 +217,7 @@ var App = React.createClass({
 
 	componentDidMount : function(){
 
-	    this.domStyle = React.findDOMNode(this).style;
+	    this.domStyle = ReactDOM.findDOMNode(this).style;
 
 		// this.domStyle.transform = 'translateX(-' + this.props.offset * this.props.currentIndex + 'px) translateZ(0)';
 		this.domStyle.transition = 'transform 300ms ease';

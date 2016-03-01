@@ -1,23 +1,6 @@
 var React = require('react');
 var Immutable = require('immutable');
 
-var CheckBox = React.createClass({
-
-	onCheckboxClick : function(e){
-		e.stopPropagation();
-		this.props.onCheck && this.props.onCheck(!this.props.checked);
-	},
-
-	render : function(){
-		return (
-			<span onClick={this.onCheckboxClick} 
-				  className={"tree-check-icon tree-icon " + 
-							(this.props.checked ? "tree-check-icon-checked" : "tree-check-icon-unchecked") } 
-			></span>
-		)
-	}
-})
-
 var Tree = React.createClass({
 
 	propTypes : {
@@ -53,6 +36,44 @@ var Tree = React.createClass({
 
 	componentWillMount : function(){
 		// this.props.node = Immutable.Map(this.props.node);
+	},
+
+	_onExpand : function(e){
+		e.stopPropagation();
+		this.setState({
+			expand : !this.state.expand
+		})
+	},
+
+	_onCheckboxClick : function(checked){
+
+		this.childrenCheck = checked;
+		// this.props.checkParent && this.props.checkParent(checked);
+		this.setState({
+			checked : checked
+		});
+	},
+
+	_onSelected : function(){
+		this.setState({
+			selected : !this.state.selected
+		})
+	},
+
+	_addChild : function(e){
+		e.stopPropagation();
+		var text = prompt("Please enter the new node's value");
+		if(text) {
+			this.props.addNode(text, this.props.node.get('id'));
+		}
+	},
+
+	_deleteNode : function(e){
+		e.stopPropagation();
+		var result = confirm("Do you really want to delete this node?");
+		if(result) {
+			this.props.deleteNode(this.props.node.get('id'));
+		}
 	},
 
 	render : function(){
@@ -104,46 +125,24 @@ var Tree = React.createClass({
 
 			</div>
 		)
-	},
+	}
+});
 
-	_onExpand : function(e){
+var CheckBox = React.createClass({
+
+	onCheckboxClick : function(e){
 		e.stopPropagation();
-		this.setState({
-			expand : !this.state.expand
-		})
+		this.props.onCheck && this.props.onCheck(!this.props.checked);
 	},
 
-	_onCheckboxClick : function(checked){
-
-		this.childrenCheck = checked;
-		// this.props.checkParent && this.props.checkParent(checked);
-
-		this.setState({
-			checked : checked
-		});
-	},
-
-	_onSelected : function(){
-		this.setState({
-			selected : !this.state.selected
-		})
-	},
-
-	_addChild : function(e){
-		e.stopPropagation();
-		var text = prompt("Please enter the new node's value");
-		if(text) {
-			this.props.addNode(text, this.props.node.get('id'));
-		}
-	},
-
-	_deleteNode : function(e){
-		e.stopPropagation();
-		var result = confirm("Do you really want to delete this node?");
-		if(result) {
-			this.props.deleteNode(this.props.node.get('id'));
-		}
-	},
+	render : function(){
+		return (
+			<span onClick={this.onCheckboxClick} 
+				  className={"tree-check-icon tree-icon " + 
+							(this.props.checked ? "tree-check-icon-checked" : "tree-check-icon-unchecked") } 
+			></span>
+		)
+	}
 });
 
 module.exports = Tree;

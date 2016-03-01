@@ -1,7 +1,7 @@
 'use strict';
 
-// initialize touch events in mobile
-React.initializeTouchEvents(true);
+var React = require('react');
+var ReactDOM = require('react-dom');
 
 var MaxDistance = 100,
 	
@@ -12,30 +12,11 @@ var MaxDistance = 100,
             setTimeout(callback);
           };
 
-// Slide Item object, to wrap the children elements inside Slider
-var SlideItem = React.createClass({
-	render : function(){
-		return (
-			<div className="slider-item" style={{
-					position : 'absolute',
-					top : '0px',
-					left : '0px',
-					width: '100%',
-					height: '100%',
-					transform: this.props.transform,
-					WebkitTransform: this.props.transform
-				}}>
-				{this.props.children}
-			</div>
-		)
-	}
-});
-
 var SlideView = React.createClass({
 
 	componentDidMount : function(){
 		// Get current dom reference
-	    this.domStyle = React.findDOMNode(this).style;
+	    this.domStyle = ReactDOM.findDOMNode(this).style;
    		this.OverThreshold = false;
    		this.currentIndex = this.props.currentIndex;
 
@@ -207,6 +188,25 @@ var SlideView = React.createClass({
 		)
 	}
 
+});
+					
+// Slide Item object, to wrap the children elements inside Slider
+var SlideItem = React.createClass({
+	render : function(){
+		return (
+			<div className="slider-item" style={{
+					position : 'absolute',
+					top : '0px',
+					left : '0px',
+					width: '100%',
+					height: '100%',
+					transform: this.props.transform,
+					WebkitTransform: this.props.transform
+				}}>
+				{this.props.children}
+			</div>
+		)
+	}
 });
 
 module.exports = SlideView;

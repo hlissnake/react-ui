@@ -26,7 +26,7 @@ var TreeAction = {
 	load : function(data){
 		return {
 			type : 'load',
-			data : data
+			data
 		}
 	}
 }

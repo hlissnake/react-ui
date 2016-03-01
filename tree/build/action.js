@@ -1,34 +1,34 @@
 
 var TreeAction = {
 
-	create : function(node_content, id){
+	create: function (node_content, id) {
 		return {
-			type : 'create',
-			content : node_content,
-			id : id
-	    };
+			type: 'create',
+			content: node_content,
+			id: id
+		};
 	},
 
-	delete : function(id){
+	delete: function (id) {
 		return {
-	    	type : 'delete',
-	    	id : id
-	    };
+			type: 'delete',
+			id: id
+		};
 	},
 
-	search : function(text){
+	search: function (text) {
 		return {
-	    	type : 'search',
-	    	text : text
-	    };
+			type: 'search',
+			text: text
+		};
 	},
 
-	load : function(data){
+	load: function (data) {
 		return {
-			type : 'load',
-			data : data
-		}
+			type: 'load',
+			data
+		};
 	}
-}
+};
 
 module.exports = TreeAction;
